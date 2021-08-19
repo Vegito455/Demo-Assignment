@@ -1,0 +1,16 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(250, 251, 252);
+  }
+  
+  
+  .cursor {
+    cursor: pointer;
+  }
+  
+
+  .alert{
+    color: red;
+  }

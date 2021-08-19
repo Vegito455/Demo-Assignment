@@ -1,0 +1,16 @@
+.footer{
+    background-color: #ffffff;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+}
+
+.copy-right{
+    color: gray;
+    margin-top: 1rem;
+}
+
+.tweet-button, .facebook-button{
+    text-shadow: 0.3px 0.3px #1f618d;
+  background-color: #d6eaf8;
+  border-color: #aed6f1;
+}

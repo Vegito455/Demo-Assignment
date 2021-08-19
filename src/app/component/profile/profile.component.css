@@ -1,0 +1,22 @@
+.top-navbar{
+    background-color: #ffffff;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+}
+
+.edit-button{
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color:black;
+    padding: 3%;
+    margin-top: 5%;
+}
+
+.form-group{
+    margin: 4%;
+  }
+  
+  .modal-header{
+      background-color:#3aa5dc ;
+      color: white;
+  }

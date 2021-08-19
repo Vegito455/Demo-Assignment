@@ -1,0 +1,326 @@
+<div class="container-fluid">
+  <div class="top-navbar">
+
+
+
+    <div class="row" *ngIf="profileData != null else noDataFound">
+
+      <div class="col-md-12">
+
+        <h3 class="h3-responsive" style="margin-left: 9%;margin-bottom: 2%;margin-top: 2%;">Profile</h3>
+      </div>
+      <div class="col-md-4">
+
+
+        <div class="text-center">
+          <img src="{{ profileData.image }}" width="300" height="400" class="img-fluid" />
+          <div>
+
+            <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editImage"
+              (click)="editPhoto(profileData.id)">
+              Edit Photo
+            </button>
+
+            <!-- nitesh -->
+            <button type="button" class="btn btn-primary edit-button" style="margin-left: 5%;" data-toggle="modal"
+              data-target="#exampleModalCenter" (click)="editProfile(profileData.id);">
+              Edit Profile
+            </button>
+           
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-md-8">
+
+
+        <p>
+          I'm {{ profileData.firstName }} {{ profileData.lastName }} and I'm above
+          {{ profileData.age }} years and you can send me emails to
+          <span class="text-primary">{{ profileData.email }}</span>. I live in the state of {{ profileData.state }}.
+          <span *ngIf="profileData.subcribeNews">And please send me newsletter. </span>
+          Please reach out to me on my phone number
+        </p>
+        <a class="btn btn-success text-white py-2 px-5 agree-btn">I Agree</a>
+
+      </div>
+
+
+
+    </div>
+
+    <ng-template #noDataFound>
+
+      <div class="row" style="min-height: 90vh; background: white">
+        <div style="text-align: center" class="col-md-12">
+          <br />
+          <span style="
+          background: white;
+          font-size: 18px;
+          font-family: 'Verdana';
+          font-weight: bold;
+        ">Data Not Found !!!
+          </span>
+        </div>
+      </div>
+
+    </ng-template>
+
+
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Profile Details</h5>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fas fa-times fa-3x"></i></span>
+        </a>
+      </div>
+      <div class="modal-body">
+
+
+
+
+        <form [formGroup]="editForm" (submit)="submitedForm(editForm.value)">
+
+          <div class="row">
+
+            <div class="col-md-4">
+
+
+              <div class="text-center form-group justify-content-center">
+                <span>
+
+                  <img src="{{ profileData.image }}" class="img-fluid" />
+                </span>
+
+
+              </div>
+
+
+
+
+
+            </div>
+
+            <div class="col-md-8">
+
+
+              <div class="row">
+
+                <div class="col-md-6 px-4">
+
+                  <div class="form-group">
+                    
+                    <input type="text" name="firstName" placeholder="First Name" class="form-control"
+                      formControlName="firstName">
+                    <small *ngIf="firstName.errors?.required && firstName.touched" class="alert">
+                      First Name Required
+                    </small>
+                    <small *ngIf="firstName.errors?.pattern && firstName.touched" class="alert">
+                      Enter Valid Name and maximum 20 characters
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 px-4">
+                  <div class="form-group">
+                    
+                    <input type="text" name="lastName" placeholder="Last Name" class="form-control"
+                      formControlName="lastName">
+                    <small *ngIf="lastName.errors?.required && lastName.touched" class="alert">
+                      Last Name Required
+                    </small>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                
+                <input type="text" name="email" placeholder="Email" class="form-control" formControlName="email">
+                <small *ngIf="email.errors?.required && email.touched" class="alert">
+                  Email Required
+                </small>
+                <small *ngIf="email.errors?.pattern && email.touched" class="alert">
+                  Invalid Email Format
+                </small>
+              </div>
+
+              <div class="form-group">
+
+                <input type="text" name="mobile" placeholder="(541) 754-3010" class="form-control"
+                  formControlName="mobile">
+                <small *ngIf="mobile.errors?.required && mobile.touched" class="alert">
+                  Phone No. Required
+                </small>
+                <small *ngIf="mobile.errors?.pattern && mobile.touched" class="alert">
+                  Enter Valid Phone No.
+                </small>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12 col-lg-3 age">Age : {{ age }}</div>
+                  <div class="col-12 col-lg-9">
+                    <input type="range" min="20" max="60" value="20" style="width: 100%;" class="slider" id="myRange"
+                      (input)="ageRange($event.srcElement.value)" (change)="ageRange($event.srcElement.value)"
+                      formControlName="age" />
+                    <div class="col-12 p-0">
+                      <span>20</span> <span class="text-end" style="margin-left: 87%;">60</span>
+                    </div>
+                    <div *ngIf="age.invalid && age.touched">
+                      <small class="alert" *ngIf="age.errors?.required">Please Select
+                        Age</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <select formControlName="state" class="form-control">
+                  <option selected hidden value="">State</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+
+                </select>
+                <div *ngIf="state.invalid && state.touched">
+                  <small class="alert" *ngIf="state.errors?.required">Please Select a
+                    State</small>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <select formControlName="country" class="form-control"
+                  [class.is-invalid]="country.invalid && country.touched">
+                  <option selected hidden value="">Country</option>
+                  <option value="India">India</option>
+                  <option value="Afghanistan">Afghanistan</option>
+                  <option value="China">China</option>
+                  <option value="France">France</option>
+                </select>
+                <div *ngIf="country.invalid && country.touched">
+                  <small class="alert" *ngIf="country.errors?.required">Please Select a
+                    Country</small>
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <select formControlName="address" class="form-control"
+                  (change)="displayAddress(editForm.controls.address.value)">
+                  <option selected hidden value="">Address</option>
+                  <option value="1">Home</option>
+                  <option value="2">Company</option>
+                </select>
+                <div *ngIf="address.invalid && address.touched">
+                  <small class="alert" *ngIf="address.errors?.required">Select
+                    Address</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea *ngIf="showHomeFlag" class="form-control" placeholder="Home Address 1"
+                  formControlName="address1"></textarea>
+                <div *ngIf="address1.invalid && address1.touched ">
+                  <small class="alert" *ngIf="address1.errors?.required">Home Address Required</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea *ngIf="showHomeFlag" class="form-control" placeholder="Home Address 2"
+                  formControlName="address2"></textarea>
+                <div *ngIf="address2.invalid && address2.touched">
+                  <small class="alert" *ngIf="address2.errors?.required">Home Address
+                    Required</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea *ngIf="showCompanyFlag" class="form-control" placeholder="Company Address 1"
+                  formControlName="companyAddress1"></textarea>
+                <div *ngIf="companyAddress1.invalid && companyAddress1.touched">
+                  <small class="alert" *ngIf="companyAddress1.errors?.required">Company Address Required</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea *ngIf="showCompanyFlag" class="form-control" placeholder="Company Address 2"
+                  formControlName="companyAddress2"></textarea>
+                <div *ngIf="companyAddress2.invalid && companyAddress2.touched">
+                  <small class="alert" *ngIf="companyAddress2.errors?.required">Company Address Required</small>
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-12 form-group">
+                <input #cb1 type="checkbox" formControlName="subcribeNews" class="largerCheckbox" [checked]="subcribe">
+                <label class="form-label " style="margin-left: 3%;">Subscribe to Newsletter
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="text-end">
+            <button type="button" class="btn btn-secondary" (click)="resetForm()" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary m-3">Save changes</button>
+          </div>
+
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--Edit Image Modal -->
+<div class="modal fade" id="editImage" tabindex="-1" role="dialog" aria-labelledby="editImage" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Photo</h5>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fas fa-times fa-3x"></i></span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editPhotoForm" (submit)="submitedProfilePhoto(editPhotoForm.value)">
+          <div class="row justify-content-center">
+
+            <img class="img-fluid mb-3" src="{{ profileImage }}" width="400" height="500"
+              *ngIf="profileImage != null" />
+            <input type="file" formControlName="image" (change)="uploadImage($event)">
+            <span>Upload Photo</span>
+
+          </div>
+          <div class="text-end">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary m-3">Save</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

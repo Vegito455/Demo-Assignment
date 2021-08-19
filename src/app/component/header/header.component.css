@@ -1,0 +1,20 @@
+.active {
+    border-top: 4px solid #5dade2;
+}
+
+
+.navbar-brand {
+    font-size: 25px;
+    margin-left: 10% !important;
+    font-weight: bolder;
+}
+
+.navbar-collapse{
+    font-weight: 500;
+}
+
+.bg-dark {
+    --bs-bg-opacity: 0.3;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+   
+}

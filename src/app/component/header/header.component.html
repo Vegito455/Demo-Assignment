@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-transparent fixed-top scrolling-navbar">
+  <a class="navbar-brand m-5"  routerLink="/home">DEMO APP</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <span class="" style="margin-left: 35%;">
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto" style="font-size: 20px;">
+        <li class="nav-item" routerLinkActive="active"  (click)="onClick(1)"   [ngClass]="{'active': tab==='tab1'}" >
+          <a class="nav-link" routerLink="/home" >HOME</a>
+        </li>
+        <li class="nav-item"  (click)="onClick(2)"   [ngClass]="{'active': tab==='tab2'}">
+          <a class="nav-link">ABOUT US</a>
+        </li>
+        <li class="nav-item" (click)="onClick(3)"   [ngClass]="{'active': tab==='tab3'}">
+          <a class="nav-link">JOBS</a>
+        </li>
+        <li class="nav-item" (click)="onClick(4)"   [ngClass]="{'active': tab==='tab4'}">
+          <a class="nav-link">CLIENTS</a>
+        </li>
+        <li class="nav-item" (click)="onClick(5)"   [ngClass]="{'active': tab==='tab5'}">
+          <a class="nav-link">EMPLOYEES</a>
+        </li>
+        <li class="nav-item" (click)="onClick(6)"   [ngClass]="{'active': tab==='tab6'}">
+          <a class="nav-link">CONTACT US</a>
+        </li>
+      </ul>
+    </div>
+
+  </span>
+
+</nav>
